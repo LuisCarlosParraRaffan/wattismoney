@@ -38,7 +38,7 @@ const Hero = () => {
             Invierte en el Futuro de la Energía
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Únete a la revolución energética y genera retornos sostenibles mientras construyes un futuro más limpio para Colombia.
+            Únete a la revolución energética y genera retornos del 14% E.A. mientras construyes un futuro más sostenible para las prinicipales industrias de latinoamerica.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}

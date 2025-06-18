@@ -9,19 +9,19 @@ const testimonials = [
   {
     name: 'María González',
     role: 'Inversionista desde 2021',
-    image: '/images/testimonial-1.jpeg',
+    image: './images/testimonial-1.jpeg',
     quote: 'He visto un retorno del 14% anual en mis inversiones. La plataforma es transparente y el equipo siempre está disponible para resolver dudas.',
   },
   {
     name: 'Carlos Rodríguez',
     role: 'Empresario',
-    image: '/images/testimonial-2.jpeg',
+    image: './images/testimonial-2.jpeg',
     quote: 'La combinación perfecta entre rentabilidad y sostenibilidad. Mis inversiones están generando impacto positivo en el medio ambiente.',
   },
   {
     name: 'Ana Martínez',
     role: 'Ingeniera Ambiental',
-    image: '/images/testimonial-3.jpeg',
+    image: './images/testimonial-3.jpeg',
     quote: 'Como profesional del sector, puedo confirmar que los proyectos son de alta calidad y cumplen con todos los estándares internacionales.',
   },
 ];
