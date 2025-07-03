@@ -38,7 +38,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="section-padding bg-black text-primary">
+    <section id="testimonials" className="section-padding bg-black text-primary">
       <div className="container-custom">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

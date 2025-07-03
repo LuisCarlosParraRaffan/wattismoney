@@ -1,70 +1,103 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { UserPlusIcon, DocumentTextIcon, CurrencyDollarIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 const steps = [
   {
-    icon: UserPlusIcon,
     number: '01',
-    title: 'Déja tus datos',
-    description: 'Nosotros te contactaremos para que puedas invertir en un contrato de energía renovable.',
+    title: 'Crea tu perfil de inversionista',
+    description: 'Regístrate en pocos pasos, define tu perfil y preferencias de inversión. Desde USD 100, accede a oportunidades antes reservadas para grandes fondos.',
+    image: '/images/1-emocion.png',
   },
   {
-    icon: DocumentTextIcon,
     number: '02',
-    title: 'Agendaremos una cita',
-    description: 'Te llamaremos para explicarte el proceso y los detalles de la inversión.',
+    title: 'Explora contratos y selecciona el que más se ajuste a tu perfil',
+    description: 'Accede a un portafolio diversificado de contratos energéticos. Puedes ver los detalles de cada contrato, fraccionarlos y elegir exactamente dónde y cuánto quieres invertir.',
+    image: '/images/2-analisis.png',
   },
   {
-    icon: CurrencyDollarIcon,
     number: '03',
-    title: 'Invierte',
-    description: 'Realiza tu inversión de manera segura a través de nuestra plataforma.',
+    title: 'Configura tu retorno',
+    description: 'Define cómo quieres recibir tu capital e intereses. Repagos mensuales, trimestrales o al vencimiento. Claridad total desde el primer momento.',
+    image: '/images/3-configuracion.png',
   },
   {
-    icon: ChartBarIcon,
     number: '04',
-    title: 'Gana',
-    description: 'Recibe retornos mensuales y monitorea el crecimiento de tu inversión.',
+    title: 'Haz seguimiento y conoce tu impacto',
+    description: 'Visualiza tus ganancias en tiempo real. Recibe reportes de desempeño y descubre el impacto ambiental generado por tu inversión.',
+    image: '/images/4-seguimiento.png',
   },
 ];
 
 const HowItWorks = () => {
   return (
-    <section className="section-padding">
-      <div className="container-custom">
+    <section id="how-it-works" className="section-padding relative overflow-hidden">
+      {/* Video de fondo */}
+      <div className="absolute inset-0 -z-10">
+        <video
+          src="/images/5-fondoHowItWorks.mp4"
+          className="w-full h-full object-cover opacity-30 blur-sm"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        />
+        <div className="absolute inset-0" style={{ background: 'rgba(98, 0, 234,0.2)' }} />
+      </div>
+      
+      <div className="container-custom relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-3xl md:text-4xl font-bold text-center mb-16"
         >
-          Cómo Funciona
+          ¿ Cómo Funciona ?
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="space-y-8">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="relative"
+              transition={{ 
+                duration: 0.8,
+                delay: index * 0.3,
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+              }}
+              className={`flex flex-col lg:flex-row items-center gap-8 ${
+                index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+              }`}
             >
-              <div className="bg-black text-primary p-8 rounded-xl h-full">
-                <div className="flex items-center mb-6">
-                  <step.icon className="w-8 h-8 mr-4" />
-                  <span className="text-2xl font-bold">{step.number}</span>
+              {/* Imagen */}
+              <div className="w-full lg:w-1/2">
+                <div className="relative h-64 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                  <Image
+                    src={step.image}
+                    alt={step.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
-                <h3 className="text-xl font-bold mb-4">{step.title}</h3>
-                <p className="text-primary/80">{step.description}</p>
               </div>
-              
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-black" />
-              )}
+
+              {/* Contenido */}
+              <div className="w-full lg:w-1/2">
+                <div className="bg-black text-primary p-8 rounded-xl h-full">
+                  <div className="mb-6">
+                    <span className="text-3xl font-bold text-primary">{step.number}</span>
+                  </div>
+                  <h3 className="text-2xl lg:text-3xl font-black mb-6 leading-tight">{step.title}</h3>
+                  <p className="text-primary/80 text-lg leading-relaxed">{step.description}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

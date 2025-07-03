@@ -17,7 +17,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <video
           ref={videoRef}
@@ -35,10 +35,13 @@ const Hero = () => {
           className="text-center"
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-            Invierte en el Futuro de la Energía
+          Invierte en contratos de energía con rentabilidades desde 14% E.A.
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Únete a la revolución energética y genera retornos del 14% E.A. mientras construyes un futuro más sostenible para las prinicipales industrias de latinoamerica.
+            Únete a la revolución energética y genera retornos mientras construyes un futuro más sostenible para las prinicipales industrias de latinoamerica.
+          </p>
+          <p className="text-[12px] md:text-xl mb-12 max-w-3xl mx-auto">
+           Todos los contratos tendrán fuente de pago para garantizar la rentabilidad de tu inversión
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
