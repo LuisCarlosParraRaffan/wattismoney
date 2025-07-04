@@ -31,3 +31,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts 
+# GitHub Pages build files
+index.html
+404.html
+_next/
+images/
