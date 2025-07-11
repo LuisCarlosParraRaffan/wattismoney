@@ -1,31 +1,20 @@
-'use client';
-
 import '../styles/globals.css'
-import LogoAnimation from '@/components/LogoAnimation'
-import { useState } from 'react'
-import Header from '@/components/Header'
+import { metadata } from './metadata'
+import ClientLayout from '@/components/ClientLayout'
+
+export { metadata }
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [isLogoAnimationComplete, setIsLogoAnimationComplete] = useState(false);
-
   return (
     <html lang="es">
       <body>
-        {!isLogoAnimationComplete && (
-          <LogoAnimation onAnimationComplete={() => setIsLogoAnimationComplete(true)} />
-        )}
-        {isLogoAnimationComplete && (
-          <>
-            <Header />
-            <main className="min-h-screen pt-16">
-              {children}
-            </main>
-          </>
-        )}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   )

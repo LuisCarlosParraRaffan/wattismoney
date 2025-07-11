@@ -19,9 +19,10 @@ const Header = () => {
         <Image
           src="/images/WiM_Logo.svg"
           alt="WattIsMoney Logo"
-          width={60}
-          height={60}
-          className="h-auto w-auto"
+          width={120}
+          height={40}
+          className="h-8 w-auto object-contain"
+          priority
         />
       </div>
 

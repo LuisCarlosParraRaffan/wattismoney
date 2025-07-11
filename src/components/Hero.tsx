@@ -1,30 +1,84 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const playVideo = async () => {
       if (videoRef.current) {
-        videoRef.current.play();
+        try {
+          // Intentar reproducir el video
+          await videoRef.current.play();
+          setIsVideoLoaded(true);
+        } catch (error) {
+          console.log('Video autoplay failed, will retry on user interaction');
+          // Si falla, intentar reproducir en la primera interacción del usuario
+          const handleUserInteraction = async () => {
+            try {
+              await videoRef.current?.play();
+              setIsVideoLoaded(true);
+              document.removeEventListener('touchstart', handleUserInteraction);
+              document.removeEventListener('click', handleUserInteraction);
+            } catch (err) {
+              console.log('Video still cannot play');
+            }
+          };
+          
+          document.addEventListener('touchstart', handleUserInteraction);
+          document.addEventListener('click', handleUserInteraction);
+        }
       }
-    }, 1000); // Reproducir después de 1 segundo
+    };
 
-    return () => clearTimeout(timer);
+    // Intentar reproducir inmediatamente y después de un delay
+    playVideo();
+    const timer = setTimeout(playVideo, 1000);
+    
+    // También intentar reproducir cuando el video esté listo
+    const handleCanPlay = () => {
+      playVideo();
+    };
+    
+    if (videoRef.current) {
+      videoRef.current.addEventListener('canplay', handleCanPlay);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (videoRef.current) {
+        videoRef.current.removeEventListener('canplay', handleCanPlay);
+      }
+    };
   }, []);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 -z-10">
+        {/* Video de fondo */}
         <video
           ref={videoRef}
           src="/images/Videoinicial.mp4"
           className="w-full h-full object-cover opacity-30"
           muted
           loop
+          playsInline
+          preload="metadata"
+          autoPlay
+        />
+        
+        {/* Imagen de respaldo para dispositivos que no soportan video */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-gradient-to-br from-yellow-200 via-yellow-100 to-green-100 opacity-30"
+          style={{
+            backgroundImage: `url('/images/Videoinicial.mp4')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         />
       </div>
       <div className="container-custom relative z-10">
